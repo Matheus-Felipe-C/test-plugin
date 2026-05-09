@@ -27,10 +27,12 @@ export default defineConfig({
 </body>
 </html>`;
 
-        // Export as a JS module so the plugin can import it
+        // Export as a getter function — keeps the string inlined at the call site
+        // after bundling, avoiding a separate top-level variable that the
+        // Amplenote Plugin Builder would strip out.
         writeFileSync(
           "src/counter-embed.js",
-          `export const counterHTML = ${JSON.stringify(html)};\n`
+          `export default function getCounterHTML() { return ${JSON.stringify(html)}; }\n`
         );
 
         console.log("✓ counter-embed.js written");

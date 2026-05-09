@@ -1,7 +1,7 @@
 // plugin.js
 // The build step generates this file from the compiled Svelte output.
 // Commit it; the GitHub→Amplenote plugin will bundle it into the note.
-import { counterHTML } from "./counter-embed.js";
+import getCounterHTML from "./counter-embed.js";
 
 const plugin = {
   // ── Trigger: adds "Counter" to the quick-open menu ─────────────────────
@@ -27,7 +27,7 @@ const plugin = {
 
   // ── Renders the Svelte app inside the embed iFrame ─────────────────────
   renderEmbed(app, ...args) {
-    return counterHTML;
+    return getCounterHTML();
   },
 
   // ── Receives calls from window.callAmplenotePlugin() in the embed ───────
