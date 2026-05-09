@@ -21,9 +21,13 @@ async function notify() {
   console.log("Plugin replied:", msg);
 }
 
+async function showAlert(message) {
+  await window.callAmplenotePlugin("showAlert", message);
+}
+
 function increment() { count.value++; notify(); }
 function decrement() { count.value--; notify(); }
-function reset()     { count.value = 0; notify(); }
+function reset()     { count.value = 0; notify(); showAlert("Resetted!"); }
 </script>
 
 <style>

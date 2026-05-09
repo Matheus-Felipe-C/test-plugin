@@ -32,13 +32,23 @@ const plugin = {
 
   // ── Receives calls from window.callAmplenotePlugin() in the embed ───────
   async onEmbedCall(app, action, ...args) {
-    if (action === "countChanged") {
-      const [count] = args;
-      // Example: persist the count as a note setting
-      await app.setSetting("lastCount", String(count));
-      return `Saved count: ${count}`;
+    switch (action) {
+      case "countChanged": {
+        const [count] = args;
+        await app.setSetting("lastCount", String(count));
+        return `Saved count: ${count}`;
+      }
+      case "showAlert": {
+        const [message] = args;
+        await app.alert(message);
+        return;
+      }
+      case "prompt": {
+        const [message] = args;
+        return await app.prompt(message); // return value flows back to the embed
+      }
     }
-  },
+  }
 };
 
 export default plugin;
