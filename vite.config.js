@@ -7,11 +7,15 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/plugin.js",
-      formats: ["es"],
-      fileName: "plugin"
+      formats: ["iife"],
+      name: "plugin",
+      fileName: () => "plugin.js"
     },
     rolldownOptions: {
-      external: []
-    }
+      output: {
+        footer: "",
+      },
+    },
+    minify: false,
   }
 })
