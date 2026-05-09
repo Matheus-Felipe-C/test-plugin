@@ -1,8 +1,10 @@
 // vite.config.js
 import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [
+    vue(),
     {
       // Rollup always outputs `var <name> = (() => { ... })();` for IIFE.
       // This plugin strips that wrapper and replaces it with a plain arrow IIFE.
@@ -19,14 +21,5 @@ export default defineConfig({
       },
     },
   ],
-  build: {
-    outDir: "dist",
-    lib: {
-      entry: "src/plugin.js",
-      formats: ["iife"],
-      name: "plugin",
-      fileName: () => "plugin.js",
-    },
-    minify: false,
-  },
+  // build config removed — production bundling is handled by build.mjs (esbuild)
 });
