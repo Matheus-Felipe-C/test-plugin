@@ -1,7 +1,7 @@
 <script setup>
-import Counter from './components/Counter.vue';
+  import MainCalendar from './components/MainCalendar.vue';
 </script>
 
 <template>
-  <Counter />
+  <MainCalendar></MainCalendar>
 </template>
