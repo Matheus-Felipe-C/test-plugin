@@ -142,12 +142,6 @@ body {
     padding: 20px;
 }
 
-.day-column {
-    min-width: 300px;
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-}
 
 .sidebar-container {
     width: 200px;

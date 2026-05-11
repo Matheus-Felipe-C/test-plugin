@@ -1,15 +1,10 @@
 <script setup>
+import { formatTime, formatDuration } from '../utils/date';
+
 defineProps({
     task: Object,
 });
 
-function formatTime(timestamp) {
-    return new Date(timestamp * 1000)
-        .toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-        });
-}
 </script>
 
 <template>
@@ -19,7 +14,7 @@ function formatTime(timestamp) {
                 {{ formatTime(task.startAt) }}
             </span>
 
-            <span class="task-duration">1h</span>
+            <span class="task-duration">{{ formatDuration(task.startAt, task.endAt) }}</span>
         </div>
 
         <h3 class="task-title">
@@ -34,20 +29,20 @@ function formatTime(timestamp) {
 
 <style scoped>
 .task-card {
-    background: white;
+    background: var(--bg-card);
     border: 1px solid #eceae7;
-    border-radius: 12px;
+    border-radius: var(--border-primary);
     padding: 14px;
     margin-top: 12px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: 0.2s ease;
+    transition: var(--transition-normal);
     cursor: pointer;
 }
 
 .task-card:hover {
-    border-color: #d8d5d1;
+    border-color: var(--border-hover);
     transform: translateY(-1px);
 }
 

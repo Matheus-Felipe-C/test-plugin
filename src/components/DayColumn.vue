@@ -1,19 +1,13 @@
 <script setup>
 import { computed } from 'vue';
 import Taskcard from './Taskcard.vue';
+import { Plus } from 'lucide-vue-next';
+import { isSameDay, formatTime, formatDuration } from '../utils/date';
 
 const props = defineProps({
     date: Date,
     tasks: Array,
 })
-
-function isSameDay(timestamp, date) {
-    const taskDate = new Date(timestamp * 1000);
-
-    return (
-        taskDate.toDateString() === date.toDateString()
-    );
-}
 
 const dayTasks = computed(() => {
     return props.tasks.filter(task => {
@@ -27,12 +21,17 @@ const formattedDate = computed(() => {
         day: 'numeric',
     });
 });
+
+
 </script>
 
 <template>
     <div class="day-column">
         <h1>{{ formattedDate }}</h1>
-        <button>Add task</button>
+        <div class="add-task">
+            <button><Plus :size="16"></Plus> Add task</button>
+            <p>4:30</p>
+        </div>
 
         <Taskcard
             v-for="task in dayTasks"
@@ -41,3 +40,42 @@ const formattedDate = computed(() => {
         />
     </div>
 </template>
+
+<style scoped>
+
+.day-column {
+    min-width: 300px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
+}
+
+.add-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-primary);
+    padding: 0px 10px;
+}
+
+.add-task button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.add-task button:hover {
+    border-color: var(--border-hover);
+    transform: translateY(1px);
+    color: var(--text-primary);
+}
+
+.add-task p {
+    background: var(--bg-secondary);
+    padding: 0px 5px;
+    text-align: center;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+}
+</style>
