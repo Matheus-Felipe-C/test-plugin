@@ -76,6 +76,7 @@ const totalTaskDuration = computed(() => {
 
 .add-task p {
     background: var(--bg-secondary);
+    font-size: 14px;
     padding: 0px 5px;
     text-align: center;
     color: var(--text-secondary);
