@@ -6,8 +6,18 @@ export function formatTime(timestamp) {
         })
 }
 
-export function formatDuration(startAt, endAt) {
-    const totalMinutes = (endAt - startAt) / 60;
+export function getTaskDuration(task) {
+    return task.endAt - task.startAt;
+}
+
+export function getTotalTaskDuration(tasks) {
+    return tasks.reduce((sum, task) => {
+        return sum + getTaskDuration(task);
+    }, 0);
+}
+
+export function formatDuration(seconds) {
+    const totalMinutes = Math.floor(seconds / 60);
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
 

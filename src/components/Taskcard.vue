@@ -1,5 +1,5 @@
 <script setup>
-import { formatTime, formatDuration } from '../utils/date';
+import { formatTime, formatDuration, getTaskDuration } from '../utils/date';
 
 defineProps({
     task: Object,
@@ -14,7 +14,7 @@ defineProps({
                 {{ formatTime(task.startAt) }}
             </span>
 
-            <span class="task-duration">{{ formatDuration(task.startAt, task.endAt) }}</span>
+            <span class="task-duration">{{ formatDuration(getTaskDuration(task)) }}</span>
         </div>
 
         <h3 class="task-title">

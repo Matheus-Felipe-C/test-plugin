@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import Taskcard from './Taskcard.vue';
 import { Plus } from 'lucide-vue-next';
-import { isSameDay, formatTime, formatDuration } from '../utils/date';
+import { isSameDay, formatTime, formatDuration, getTotalTaskDuration } from '../utils/date';
 
 const props = defineProps({
     date: Date,
@@ -22,6 +22,9 @@ const formattedDate = computed(() => {
     });
 });
 
+const totalTaskDuration = computed(() => {     
+    return formatDuration(getTotalTaskDuration(dayTasks.value))
+})
 
 </script>
 
@@ -30,7 +33,7 @@ const formattedDate = computed(() => {
         <h1>{{ formattedDate }}</h1>
         <div class="add-task">
             <button><Plus :size="16"></Plus> Add task</button>
-            <p>4:30</p>
+            <p>{{ totalTaskDuration }}</p>
         </div>
 
         <Taskcard
