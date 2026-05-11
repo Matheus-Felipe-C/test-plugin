@@ -12,6 +12,9 @@ export function getTaskDuration(task) {
 
 export function getTotalTaskDuration(tasks) {
     return tasks.reduce((sum, task) => {
+        if (isAllDayTask(task)) {
+            return sum;
+        }
         return sum + getTaskDuration(task);
     }, 0);
 }
@@ -38,4 +41,18 @@ export function isSameDay(timestamp, date) {
     return (
         taskDate.toDateString() === date.toDateString()
     );
+}
+
+export function isAllDayTask(task) {
+    const start = new Date(task.startAt * 1000);
+    const end = new Date(task.endAt * 1000);
+
+    return (
+        start.getHours() === 0 &&
+        start.getHours() === 0 &&
+        (
+            end.getHours() == 23 ||
+            end.getDate() !== start.getDate()
+        )
+    )
 }
