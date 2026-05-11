@@ -33,19 +33,16 @@ const plugin = {
   // ── Receives calls from window.callAmplenotePlugin() in the embed ───────
   async onEmbedCall(app, action, ...args) {
     switch (action) {
-      case "countChanged": {
-        const [count] = args;
-        await app.setSetting("lastCount", String(count));
-        return `Saved count: ${count}`;
-      }
-      case "showAlert": {
-        const [message] = args;
-        await app.alert(message);
-        return;
-      }
-      case "prompt": {
-        const [message] = args;
-        return await app.prompt(message); // return value flows back to the embed
+      case "getTasks": {
+        const notes = await app.filterNotes();
+        const allTasks = [];
+
+        for (const note of notes) {
+          const tasks = await app.getNoteTasks({ uuid: note.uuid})
+          allTasks.push(...tasks);
+        }
+
+        return allTasks;
       }
     }
   }
