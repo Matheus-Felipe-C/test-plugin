@@ -1,5 +1,6 @@
 <script setup>
 import { formatTime, formatDuration, getTaskDuration } from '../utils/date';
+import { compactTaskContent } from '../utils/text';
 
 defineProps({
     task: Object,
@@ -18,7 +19,7 @@ defineProps({
         </div>
 
         <h3 class="task-title">
-            {{ task.content }}
+            {{ compactTaskContent(task.content) }}
         </h3>
 
         <div class="task-footer">
@@ -74,6 +75,13 @@ defineProps({
     font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .task-footer {
